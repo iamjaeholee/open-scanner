@@ -18,4 +18,19 @@ void main() {
     // 3. Assert (검증)
     expect(ordered, [(0.0, 0.0), (100.0, 0.0), (100.0, 100.0), (0.0, 100.0)]);
   });
+
+  test(
+    'calculateScannedSize returns maximum width and height as rounded integer',
+    () {
+      const orderedPoints = [
+        (0.0, 0.0),
+        (100.0, 0.0),
+        (120.0, 200.0),
+        (0.0, 200.0),
+      ];
+
+      final calculated = calculateScannedSize(orderedPoints);
+      expect(calculated, (width: 120, height: 201));
+    },
+  );
 }

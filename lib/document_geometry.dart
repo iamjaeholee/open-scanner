@@ -1,3 +1,5 @@
+import 'dart:math';
+
 typedef Point = (double, double);
 
 List<Point> orderPoints(List<Point> pts) {
@@ -37,4 +39,24 @@ List<Point> orderPoints(List<Point> pts) {
   }
 
   return [topLeft, topRight, bottomRight, bottomLeft];
+}
+
+double calculateDistance(Point a, Point b) {
+  final dx = b.$1 - a.$1;
+  final dy = b.$2 - a.$2;
+  return sqrt(dx * dx + dy * dy);
+}
+
+({int width, int height}) calculateScannedSize(List<Point> pts) {
+  assert(pts.length == 4, "Points must have 4 point");
+  final [topLeft, topRight, bottomRight, bottomLeft] = pts;
+  final topWidth = calculateDistance(topLeft, topRight);
+  final bottomWidth = calculateDistance(bottomLeft, bottomRight);
+  final leftHeight = calculateDistance(topLeft, bottomLeft);
+  final rightHeight = calculateDistance(topRight, bottomRight);
+
+  return (
+    width: max(topWidth, bottomWidth).round(),
+    height: max(leftHeight, rightHeight).round(),
+  );
 }
