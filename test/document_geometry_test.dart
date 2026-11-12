@@ -45,4 +45,23 @@ void main() {
     expect(bottomRight, (120.0, 200.0));
     expect(bottomLeft, (0.0, 200.0));
   });
+
+  test(
+    'createCropSpec creates a complete DocumentCropSpec from unordered points',
+    () {
+      const unorderedPoints = [
+        (100.0, 100.0),
+        (0.0, 100.0),
+        (100.0, 0.0),
+        (0.0, 0.0),
+      ];
+
+      final spec = createCropSpec(unorderedPoints);
+
+      expect(spec.width, 100);
+      expect(spec.height, 100);
+      expect(spec.sourceCorners.first, (0.0, 0.0));
+      expect(spec.destinationCorners.last, (0.0, 100.0));
+    },
+  );
 }

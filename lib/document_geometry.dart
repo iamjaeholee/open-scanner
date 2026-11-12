@@ -72,3 +72,30 @@ List<Point> getDestinationPoints({required int width, required int height}) {
 
   return [topLeft, topRight, bottomRight, bottomLeft];
 }
+
+class DocumentCropSpec {
+  final List<Point> sourceCorners;
+  final List<Point> destinationCorners;
+  final int width;
+  final int height;
+
+  const DocumentCropSpec({
+    required this.sourceCorners,
+    required this.destinationCorners,
+    required this.width,
+    required this.height,
+  });
+}
+
+DocumentCropSpec createCropSpec(List<Point> unorderedPoints) {
+  final sourceCorners = orderPoints(unorderedPoints);
+  final (:width, :height) = calculateScannedSize(sourceCorners);
+  final destinationCorners = getDestinationPoints(height: height, width: width);
+
+  return DocumentCropSpec(
+    destinationCorners: destinationCorners,
+    sourceCorners: sourceCorners,
+    width: width,
+    height: height,
+  );
+}
