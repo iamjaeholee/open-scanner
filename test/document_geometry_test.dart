@@ -33,4 +33,16 @@ void main() {
       expect(calculated, (width: 120, height: 201));
     },
   );
+
+  test('getDestinationPoints returns rectangle corners matching the given dimensions', () {
+    final [topLeft, topRight, bottomRight, bottomLeft] = getDestinationPoints(
+      width: 120,
+      height: 200,
+    );
+
+    expect(topLeft, (0.0, 0.0));
+    expect(topRight, (120.0, 0.0));
+    expect(bottomRight, (120.0, 200.0));
+    expect(bottomLeft, (0.0, 200.0));
+  });
 }

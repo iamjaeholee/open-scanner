@@ -60,3 +60,15 @@ double calculateDistance(Point a, Point b) {
     height: max(leftHeight, rightHeight).round(),
   );
 }
+
+List<Point> getDestinationPoints({required int width, required int height}) {
+  assert(width > 0 && height > 0, 'width and height must be positive');
+  final dWidth = width.toDouble();
+  final dHeight = height.toDouble();
+  final topLeft = (0.0, 0.0);
+  final topRight = (dWidth, 0.0);
+  final bottomRight = (dWidth, dHeight);
+  final bottomLeft = (0.0, dHeight);
+
+  return [topLeft, topRight, bottomRight, bottomLeft];
+}
