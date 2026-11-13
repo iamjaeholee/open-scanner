@@ -14,4 +14,10 @@ class CropController extends ChangeNotifier {
 
     corners = [(dx, dy), (x - dx, dy), (x - dx, y - dy), (dx, y - dy)];
   }
+
+  void updateCorner({required int index, required Point newPosition}) {
+    assert(index >= 0 && index < 4, "index must be 0~3");
+    corners[index] = newPosition;
+    notifyListeners();
+  }
 }
