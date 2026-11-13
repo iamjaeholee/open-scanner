@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:image/image.dart' as img;
+
 typedef Point = (double, double);
 
 List<Point> orderPoints(List<Point> pts) {
@@ -97,5 +99,20 @@ DocumentCropSpec createCropSpec(List<Point> unorderedPoints) {
     sourceCorners: sourceCorners,
     width: width,
     height: height,
+  );
+}
+
+img.Image warpDocumentImage({
+  required img.Image sourceImage,
+  required DocumentCropSpec spec,
+}) {
+  final [tl, tr, br, bl] = spec.sourceCorners;
+  return img.copyRectify(
+    sourceImage,
+    topLeft: img.Point(tl.$1.round(), tl.$2.round()),
+    topRight: img.Point(tr.$1.round(), tr.$2.round()),
+    bottomRight: img.Point(br.$1.round(), br.$2.round()),
+    bottomLeft: img.Point(bl.$1.round(), bl.$2.round()),
+    toImage: img.Image(width: spec.width, height: spec.height),
   );
 }
