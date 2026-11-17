@@ -32,4 +32,16 @@ void main() {
     expect(br, (450.0, 720.0));
     expect(bl, (50.0, 720.0));
   });
+
+  test(
+    'CropController crops and rectifies source image using current corners',
+    () {
+      final controller = CropController(imageWidth: 100, imageHeight: 100);
+      final sourceImage = img.Image(width: 100, height: 100);
+      final result = controller.cropDocument(sourceImage);
+
+      expect(result.width, 80);
+      expect(result.height, 80);
+    },
+  );
 }

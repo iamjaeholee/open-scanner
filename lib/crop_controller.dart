@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:image/image.dart' as img;
 import 'package:open_scanner/document_geometry.dart';
 
 class CropController extends ChangeNotifier {
@@ -19,5 +20,10 @@ class CropController extends ChangeNotifier {
     assert(index >= 0 && index < 4, "index must be 0~3");
     corners[index] = newPosition;
     notifyListeners();
+  }
+
+  img.Image cropDocument(img.Image sourceImage) {
+    final spec = createCropSpec(corners);
+    return warpDocumentImage(sourceImage: sourceImage, spec: spec);
   }
 }
