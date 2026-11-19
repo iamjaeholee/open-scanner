@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const new({super.key});
+  const HomeScreen({super.key, this.onCameraTap, this.onGalleryTap});
+  final VoidCallback? onCameraTap;
+  final VoidCallback? onGalleryTap;
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +13,15 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(child: const Text('카메라로 촬영'), onPressed: () {}),
+            ElevatedButton(
+              onPressed: onCameraTap,
+              child: const Text('카메라로 촬영'),
+            ),
             const SizedBox(height: 16),
-            ElevatedButton(child: const Text('갤러리에서 선택'), onPressed: () {}),
+            ElevatedButton(
+              onPressed: onGalleryTap,
+              child: const Text('갤러리에서 선택'),
+            ),
           ],
         ),
       ),
